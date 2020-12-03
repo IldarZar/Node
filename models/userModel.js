@@ -9,4 +9,4 @@ var userSchema = new mongoose.Schema({
     }
 });
 
-mongoose.model('Employee', userSchema);
+mongoose.model('User', userSchema);

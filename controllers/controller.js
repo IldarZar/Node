@@ -1,23 +1,21 @@
 const express = require("express");
 var router = express.Router(); 
-
-const bodyparser = require("body-parser");
-
 const mongoose = require("mongoose");
+const bodyparser = require("body-parser");
 const User = mongoose.model("User");
 
 
-
 router.get('/', (req, res) => {
-    res.send("list");
-});
-
-router.post('/add', (req, res) => {
     res.render('other/add');
 });
 
-router.get('/add', (req, res) => {
-    res.render('other/add');
+router.post('/', (req, res) => {
+    var user = new User();
+    user.userName = req.body.fullName;
+    user.email = req.body.email;
+    user.save((err, doc) => {
+        res.send(doc);
+    });
 });
 
 

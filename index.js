@@ -1,14 +1,16 @@
 require('./models/db');
 
 const express = require("express");
-const mongoose = require("mongoose");
 const exphbs = require("express-handlebars");
-const path = require("path");
 const list = require("./controllers/controller");
-
+const bodyparser = require('body-parser');
 
 const app = express();
+app.use(bodyparser.urlencoded({
+    extended: true
+}));
 
+app.use(bodyparser.json());
 
 app.set('views', './views/');
 app.engine('hbs', exphbs({ 
@@ -18,6 +20,6 @@ app.engine('hbs', exphbs({
 }))
 app.set('view engine', 'hbs');
 
-app.use('/list', list); 
-
 app.listen(4000);
+
+app.use('/list', list); 
